@@ -1,18 +1,19 @@
-import MoleAtom from "../atoms/Mole"
-import HoleAtom from "../atoms/Hole"
+import React from "react"
+import mole from '../assets/WAM_mole.png'
+import hole from '../assets/WAM_hole.png'
 
-type MoleState = 'mole' | 'hole'
+export type MoleState = 'mole' | 'hole'
 
 interface MoleProps {
     state: MoleState,
+    onClick?: (state: MoleState) => void
 }
 
-function Mole({ state }: MoleProps) {
-    return (
-        <>
-            {state === 'mole' ? <MoleAtom /> : <HoleAtom />}
-        </>
-    )
+function Mole({ state, onClick }: MoleProps) {
+    const moleImage = state === 'mole' ? mole : hole
+    return <>
+        <img src={moleImage} alt={state} onClick={() => onClick?.(state)} />
+    </>
 }
 
-export default Mole
+export default React.memo(Mole)
