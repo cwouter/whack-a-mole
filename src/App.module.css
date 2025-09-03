@@ -1,0 +1,17 @@
+.connection {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.score {
+  position: absolute;
+  left: 10px;
+  top: 40px;
+}
+
+.start {
+  position: absolute;
+  left: 10px;
+  top: 100px;
+}

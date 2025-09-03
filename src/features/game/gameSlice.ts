@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { whack } from "./gameActions";
-import { act } from "react";
-
 export interface MoleState { [key: number]: { id: number, state: 'mole' | 'hole' } }
-
 
 export interface GameState {
     moles: MoleState
@@ -13,7 +10,7 @@ const initialState: GameState = {
     moles: {
         0: { id: 0, state: 'hole' },
         1: { id: 1, state: 'hole' },
-        2: { id: 2, state: 'mole' },
+        2: { id: 2, state: 'hole' },
         3: { id: 3, state: 'hole' },
         4: { id: 4, state: 'hole' },
         5: { id: 5, state: 'hole' },
