@@ -27,6 +27,13 @@ export const gameSlice = createSlice({
     name: 'game',
     initialState,
     reducers: {
+        started: (state, action) => {
+            state.moles = action.payload.moles
+        },
+        nomination: (state, action) => {
+            const moleId = action.payload.mole.id
+            state.moles[moleId].state = action.payload.mole.state
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(whack, (state, action) => {

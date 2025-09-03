@@ -6,8 +6,8 @@ export type OutEvent =
     | { event: "echo"; payload: unknown }
     | { event: "message"; payload: { msg: string } }
     | { event: "broadcast_ack"; payload: { delivered: boolean } }
-    | { event: "game:started"; payload: { moles: Record<number, { id: number; state: "mole" | "hole" }>; endsAt: number } }
-    | { event: "game:ended"; payload: { endedAt: number } }
+    | { event: "game/started"; payload: { moles: Record<number, { id: number; state: "mole" | "hole" }>; endsAt: number } }
+    | { event: "game/ended"; payload: { endedAt: number } }
     | { event: "error"; payload: { message: string; detail?: string } };
 
 type WSState = {
@@ -39,18 +39,11 @@ const wsSlice = createSlice({
         disconnected(state) {
             state.connected = false;
         },
-        message(state, action: PayloadAction<OutEvent>) {
-            console.log("message received", action.payload)
-            // state.lastEvent = action.payload;
-            // if (action.payload.event === "message") {
-            //     state.messages.push(action.payload.payload.msg);
-            // }
-        },
         error(state, action: PayloadAction<string>) {
             state.error = action.payload;
         }
     }
 });
 
-export const { connect, connected, disconnected, message, error } = wsSlice.actions;
+export const { connect, connected, disconnected, error } = wsSlice.actions;
 export default wsSlice.reducer;

@@ -1,11 +1,11 @@
-import type { Middleware } from "@reduxjs/toolkit";
-import { connect, connected, wsDisconnect, disconnected, message, wsSend } from "../store/wsSlice";
+import { createAction, type Middleware } from "@reduxjs/toolkit";
+import { connect, connected, wsDisconnect, disconnected, wsSend } from "../store/wsSlice";
 
 export const wsMiddleware: Middleware = store => {
     let socket: WebSocket | null = null;
 
     return (next) => (action: any) => {
-        // console.log(action)
+        console.log(action)
         switch (action.type) {
             case connect.type:
                 if (socket) socket.close();
@@ -17,7 +17,8 @@ export const wsMiddleware: Middleware = store => {
 
                 socket.onmessage = event => {
                     const msg = JSON.parse(event.data);
-                    store.dispatch(message(msg))
+                    const action = createAction(msg.event)
+                    store.dispatch(action(msg.payload))
                 };
 
                 socket.onclose = () => {
