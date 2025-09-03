@@ -1,16 +1,19 @@
 import { useAppDispatch } from "../../hooks"
-import { increment } from "../score/scoreSlice"
 import Mole, { type MoleState } from "../../molecules/Mole"
+import { whack } from "./gameActions"
 
-interface MoleStateItem {
-    r: number,
-    c: number,
+interface Mole {
+    id: number,
     state: MoleState,
 }
 
-function WhackAMole(args: MoleStateItem) {
+function WhackAMole({ id, state }: Mole) {
     const dispatch = useAppDispatch()
-    return <Mole state={args.state} onClick={(state: MoleState) => state === 'mole' && dispatch(increment())} />
+    return <Mole id={id} state={state} onClick={(id: number, state: MoleState) => {
+        if (state === 'mole') {
+            dispatch(whack({ id, currentState: state }))
+        }
+    }} />
 }
 
 export default WhackAMole

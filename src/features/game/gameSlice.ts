@@ -1,16 +1,17 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { whack } from "./gameActions";
+import { act } from "react";
 
-export interface MoleState {
-    id: number,
-    state: 'mole' | 'hole',
-}
+export interface MoleState { [key: number]: { id: number, state: 'mole' | 'hole' } }
+
 
 export interface GameState {
-    moles: { [key: MoleState['id']]: MoleState }
+    moles: MoleState
 }
 
 const initialState: GameState = {
     moles: {
+        0: { id: 0, state: 'hole' },
         1: { id: 1, state: 'hole' },
         2: { id: 2, state: 'mole' },
         3: { id: 3, state: 'hole' },
@@ -22,7 +23,6 @@ const initialState: GameState = {
         9: { id: 9, state: 'hole' },
         10: { id: 10, state: 'hole' },
         11: { id: 11, state: 'hole' },
-        12: { id: 12, state: 'hole' },
     }
 }
 
@@ -30,14 +30,17 @@ export const gameSlice = createSlice({
     name: 'game',
     initialState,
     reducers: {
-        whack: (state: GameState, action: PayloadAction<number>) => {
-            const mole = state.moles[action.payload]
-            if (mole.state === 'mole') {
-                state.moles[action.payload].state = 'hole'
-            }
-        },
     },
+    extraReducers: (builder) => {
+        builder.addCase(whack, (state, action) => {
+            const moleId = action.payload.id
+            const moleState = action.payload.currentState
+
+            if (moleState === 'mole') {
+                state.moles[moleId].state = 'hole'
+            }
+        })
+    }
 })
 
-export const { whack } = gameSlice.actions
 export default gameSlice.reducer

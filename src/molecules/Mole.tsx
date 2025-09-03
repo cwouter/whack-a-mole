@@ -5,14 +5,15 @@ import hole from '../assets/WAM_hole.png'
 export type MoleState = 'mole' | 'hole'
 
 interface MoleProps {
+    id: number,
     state: MoleState,
-    onClick?: (state: MoleState) => void
+    onClick?: (id: number, state: MoleState) => void
 }
 
-function Mole({ state, onClick }: MoleProps) {
+function Mole({ id, state, onClick }: MoleProps) {
     const moleImage = state === 'mole' ? mole : hole
     return <>
-        <img src={moleImage} alt={state} onClick={() => onClick?.(state)} />
+        <img src={moleImage} alt={state} onClick={() => onClick?.(id, state)} />
     </>
 }
 

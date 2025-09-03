@@ -1,8 +1,8 @@
 import bg from '../assets/WAM_bg.jpg'
-import './Background.css'
+import styles from './Background.module.css'
 
 function Background() {
-    return <div className="background">
+    return <div className={styles.background}>
         <img src={bg} alt="background" />
     </div>
 

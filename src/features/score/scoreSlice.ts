@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { whack } from "../game/gameActions";
 
 export interface ScoreState {
     value: number
@@ -12,14 +13,15 @@ export const scoreSlice = createSlice({
     name: 'score',
     initialState,
     reducers: {
-        increment: (state: ScoreState) => {
-            state.value += 1
-        },
-        decrement: (state: ScoreState) => {
-            state.value -= 1
-        },
     },
+    extraReducers: (builder) => {
+        builder.addCase(whack, (state, action) => {
+            const moleState = action.payload.currentState
+            if (moleState === 'mole') {
+                state.value += 1
+            }
+        })
+    }
 })
 
-export const { increment, decrement } = scoreSlice.actions
 export default scoreSlice.reducer
