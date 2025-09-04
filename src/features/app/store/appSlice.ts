@@ -2,24 +2,25 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 export interface AppState {
-    state: 'game' | 'score'
+    showScoreboard: boolean
 }
 
 const initialState: AppState = {
-    state: 'game'
+    showScoreboard: false,
 }
 
 export const appSlice = createSlice({
     name: 'app',
     initialState,
     reducers: {
-        startGame: (state) => {
-            state.state = 'game'
+        showGame: (state) => {
+            state.showScoreboard = false
         },
-        endGame: (state) => {
-            state.state = 'score'
+        showScoreboard: (state) => {
+            state.showScoreboard = true
         },
     },
 })
 
+export const { showGame, showScoreboard } = appSlice.actions
 export default appSlice.reducer

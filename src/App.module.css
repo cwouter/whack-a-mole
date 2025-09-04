@@ -10,8 +10,15 @@
   top: 40px;
 }
 
+
 .start {
   position: absolute;
   left: 10px;
   top: 100px;
+}
+
+.scoreboardButton {
+  position: absolute;
+  left: 10px;
+  top: 156px;
 }

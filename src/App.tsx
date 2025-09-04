@@ -7,6 +7,8 @@ import { connect } from './features/ws/store/wsSlice'
 import Score from './features/score/components/Score'
 import GameStart from './features/game/components/GameStart'
 import Cursor from './features/cursor/Cursor'
+import Scoreboard from './features/score/components/Scoreboard'
+import ScoreboardButton from './features/score/components/ScoreboardButton'
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
     <>
       <Cursor />
       <Score className={styles.score} />
+      <ScoreboardButton className={styles.scoreboardButton} />
+      <Scoreboard className={styles.scoreboard} />
       <Connection className={styles.connection} />
       <GameStart className={styles.start} />
       <Level1 />
