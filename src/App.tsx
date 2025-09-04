@@ -6,6 +6,7 @@ import styles from './App.module.css'
 import { connect } from './features/ws/store/wsSlice'
 import Score from './features/score/components/Score'
 import GameStart from './features/game/components/GameStart'
+import Cursor from './features/cursor/Cursor'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+      <Cursor />
       <Score className={styles.score} />
       <Connection className={styles.connection} />
       <GameStart className={styles.start} />
