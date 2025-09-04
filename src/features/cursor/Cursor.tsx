@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useCustomCursor } from './useCustomCursor';
 import hammer from '../../assets/WAM_Hammer.png';
+import styles from './Cursor.module.css'
 
 export default function Cursor() {
     const cursorRef = useCustomCursor();
@@ -36,13 +37,9 @@ export default function Cursor() {
             <img
                 src={hammer}
                 alt=""
+                className={styles.cursor}
+                draggable={false}
                 style={{
-                    position: 'relative',
-                    left: -60,
-                    top: -100,
-                    width: 200,
-                    height: 156,
-                    transition: 'rotate 150ms ease',
                     rotate: pressed ? '-15deg' : '15deg',
                     transformOrigin: '100% 100%',
                 }}
