@@ -11,6 +11,12 @@ interface ScoreboardProps {
 function Scoreboard({ className }: ScoreboardProps) {
     const dispatch = useAppDispatch()
     const showScoreboard = useAppSelector((state) => state.app.showScoreboard)
+    const highscores = useAppSelector((state) => {
+        const list = state.score.highscores ?? [];
+        return [...list]
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 3);
+    });
 
     return (
         <BaseScoreboard
@@ -18,13 +24,14 @@ function Scoreboard({ className }: ScoreboardProps) {
             open={showScoreboard}
             onOpenChange={() => dispatch(showGame())}
         >
-            <div className={styles.floatOuter}>
+            {highscores.length <= 0 && <div className={styles.empty}>No highscores yet</div>}
+            {highscores[0] && <div className={styles.floatOuter}>
                 <div className={styles.floatInner}>
-                    <Rank className={styles.rank1} score={1240} position={1} player="Wouter" />
+                    <Rank className={styles.rank1} score={highscores[0].score} position={1} player={highscores[0].player} />
                 </div>
-            </div>
-            <Rank className={styles.rank2} score={950} position={2} player="Wouter" />
-            <Rank className={styles.rank3} score={650} position={3} player="Wouter" />
+            </div>}
+            {highscores[1] && <Rank className={styles.rank2} score={highscores[1].score} position={2} player={highscores[1].player} />}
+            {highscores[2] && <Rank className={styles.rank3} score={highscores[2].score} position={3} player={highscores[2].player} />}
         </BaseScoreboard>
     )
 }

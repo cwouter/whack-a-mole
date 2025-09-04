@@ -19,6 +19,18 @@
   transform: scale(0.9);
 }
 
+.empty {
+  font-family: "Bagel Fat One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+  position: absolute;
+  margin: -18px;
+}
+
 .floatOuter {
   --float-distance: 8px;
   --float-duration: 3.6s;

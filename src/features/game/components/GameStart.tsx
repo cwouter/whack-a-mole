@@ -15,7 +15,8 @@ function GameStart({ className }: GameStartProps) {
         if (started) {
             dispatch(wsSend({ event: "game/end", payload: {} }))
         } else {
-            dispatch(wsSend({ event: "game/start", payload: {} }))
+            // TODO: Get player name from input
+            dispatch(wsSend({ event: "game/start", payload: { playerName: "Player" } }))
         }
     }
 
