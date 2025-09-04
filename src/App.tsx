@@ -9,10 +9,13 @@ import GameStart from './features/game/components/GameStart'
 import Cursor from './features/cursor/Cursor'
 import Scoreboard from './features/score/components/Scoreboard'
 import ScoreboardButton from './features/score/components/ScoreboardButton'
+import PlayerName from './features/app/components/PlayerName'
+import { useAppSelector } from './hooks'
 
 function App() {
 
   const dispatch = useAppDispatch()
+  const playerName = useAppSelector((state) => state.app.playerName)
 
   useEffect(() => {
     dispatch(connect())
@@ -21,8 +24,10 @@ function App() {
   return (
     <>
       <Cursor />
+      <h1 className={styles.title}>Hi, {playerName}! Welcome to Whack-a-Mole</h1>
       <Score className={styles.score} />
       <ScoreboardButton className={styles.scoreboardButton} />
+      <PlayerName className={styles.playerName} />
       <Scoreboard className={styles.scoreboard} />
       <Connection className={styles.connection} />
       <GameStart className={styles.start} />

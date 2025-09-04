@@ -1,0 +1,52 @@
+.PlayerInput {
+    border: 3px solid #735249;
+    padding: 10px;
+    font-family: "Bagel Fat One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(115 82 73);
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+
+    border-radius: 4px;
+    background-color: transparent;
+
+    transition: all 0.3s ease;
+    outline: none;
+    width: 200px;
+}
+
+.PlayerLabel {
+    display: block;
+    font-family: "Bagel Fat One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(115 82 73);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.PlayerButton {
+    font-family: "Bagel Fat One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+
+    color: rgb(115 82 73);
+    background-color: #f0c97a;
+    border-radius: 4px;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: 3px solid #735249;
+    cursor: pointer;
+    margin-left: 5px;
+
+    transition: all 0.3s ease;
+}
+
+.PlayerButton:hover {
+    background-color: #735249;
+    color: white;
+    border: 3px solid #4b3832;
+}

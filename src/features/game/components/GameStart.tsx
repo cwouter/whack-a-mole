@@ -10,13 +10,13 @@ interface GameStartProps {
 function GameStart({ className }: GameStartProps) {
     const dispatch = useAppDispatch()
     const started = useAppSelector((state) => state.game.started)
+    const playerName = useAppSelector((state) => state.app.playerName)
 
     const onClick = () => {
         if (started) {
             dispatch(wsSend({ event: "game/end", payload: {} }))
         } else {
-            // TODO: Get player name from input
-            dispatch(wsSend({ event: "game/start", payload: { playerName: "Player" } }))
+            dispatch(wsSend({ event: "game/start", payload: { playerName: playerName } }))
         }
     }
 

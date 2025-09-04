@@ -3,10 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface AppState {
     showScoreboard: boolean
+    playerName: string
 }
 
 const initialState: AppState = {
     showScoreboard: false,
+    playerName: "Guacamole"
 }
 
 export const appSlice = createSlice({
@@ -19,8 +21,11 @@ export const appSlice = createSlice({
         showScoreboard: (state) => {
             state.showScoreboard = true
         },
+        setPlayerName: (state, action) => {
+            state.playerName = action.payload
+        },
     },
 })
 
-export const { showGame, showScoreboard } = appSlice.actions
+export const { showGame, showScoreboard, setPlayerName } = appSlice.actions
 export default appSlice.reducer
