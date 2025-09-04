@@ -1,4 +1,8 @@
 .connection {
+  font-family: "Bagel Fat One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+
   color: #735249;
   font-size: 24px;
   font-weight: bold;

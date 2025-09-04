@@ -1,4 +1,8 @@
 .start {
+  font-family: "Bagel Fat One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+
   color: rgb(115 82 73);
   background-color: #f0c97a;
   border-radius: 4px;
@@ -7,6 +11,8 @@
   padding: 8px;
   border: 3px solid #735249;
   cursor: pointer;
+
+  transition: all 0.3s ease;
 }
 
 .start:hover {

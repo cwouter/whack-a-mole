@@ -12,6 +12,9 @@
   left: 50%;
   margin-left: -550px;
   filter: drop-shadow(13px 13px 22px rgba(0, 0, 0, .5));
+
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
 }
 
 .scoreboardContent {
@@ -20,7 +23,7 @@
   height: 50%;
   top: 180px;
   left: 136px;
-  z-index: 0;
+  z-index: 1;
   color: #fff;
 }
 
@@ -47,4 +50,123 @@
 .scoreboardImage {
   width: 100%;
   height: 100%;
+  image-rendering: optimizeQuality;
+}
+
+
+
+/* Root: alleen zoom + fade, GPU hinting */
+.popInZoom {
+  animation: zoomInSpring 560ms cubic-bezier(.25, .9, .3, 1.2) both;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.popOut {
+  animation: popOut 260ms ease both;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Inner: vroege wobble die overlapt met de zoom */
+.wobbleEarly {
+  animation: wobbleEarly 800ms ease-out both;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Zoom met zachte overshoot, geen blur of filter */
+@keyframes zoomInSpring {
+  0% {
+    opacity: 0;
+    transform: scale(0.72) translateZ(0);
+  }
+
+  55% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Wobble start al vroeg terwijl zoom nog bezig is.
+   Alleen kleine rotatie + micro-scale, zodat het optelt op de inner laag. */
+@keyframes wobbleEarly {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+
+  18% {
+    transform: rotate(-1.2deg) scale(0.992);
+  }
+
+  34% {
+    transform: rotate(1.0deg) scale(1.006);
+  }
+
+  50% {
+    transform: rotate(-0.8deg) scale(0.997);
+  }
+
+  66% {
+    transform: rotate(0.6deg) scale(1.003);
+  }
+
+  82% {
+    transform: rotate(-0.3deg) scale(1.000);
+  }
+
+  100% {
+    transform: rotate(0) scale(1);
+  }
+}
+
+@keyframes popOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.85) rotate(-2deg);
+  }
+}
+
+/* Optioneel: dit voorkomt dure filters tijdens animatie.
+   Vervang je drop-shadow filter door deze pseudo-schaduw. */
+/* .scoreboard {
+  filter: none;
+  position: absolute;
+} */
+
+/* je posities blijven gelden */
+.scoreboard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  /* pas evt. aan */
+  z-index: 0;
+  pointer-events: none;
+}
+
+.scoreboardImage {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .popInZoom,
+  .popOut,
+  .wobbleEarly {
+    animation: none;
+  }
 }

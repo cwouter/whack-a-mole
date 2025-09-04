@@ -1,0 +1,45 @@
+.rank1 {
+  position: absolute;
+  left: 20px;
+  top: -30px;
+  transform: scale(1.1);
+}
+
+.rank2 {
+  position: absolute;
+  left: 460px;
+  top: 20px;
+  transform: scale(1);
+}
+
+.rank3 {
+  position: absolute;
+  left: 160px;
+  top: 130px;
+  transform: scale(0.9);
+}
+
+.floatOuter {
+  --float-distance: 8px;
+  --float-duration: 3.6s;
+  animation: floatY var(--float-duration) ease-in-out infinite;
+  will-change: transform;
+}
+
+.floatInner {
+  --breathe: calc(var(--float-duration) * 1.2);
+  animation: breathe var(--breathe) ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+}
