@@ -1,5 +1,5 @@
 import { createAction, type Middleware } from "@reduxjs/toolkit";
-import { connect, connected, wsDisconnect, disconnected, wsSend } from "../store/wsSlice";
+import { connect, connected, wsDisconnect, disconnected, wsSend, error as wsError } from "../store/wsSlice";
 
 export const wsMiddleware: Middleware = store => {
     let socket: WebSocket | null = null;
@@ -8,7 +8,13 @@ export const wsMiddleware: Middleware = store => {
         console.log(action)
         switch (action.type) {
             case connect.type:
-                if (socket) socket.close();
+                if (socket) {
+                    if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+                        break; // Avoid duplicate connections in React StrictMode
+                    }
+                    socket.close();
+                    socket = null;
+                }
                 socket = new WebSocket("ws://localhost:8080/ws");
 
                 socket.onopen = () => {
@@ -19,6 +25,10 @@ export const wsMiddleware: Middleware = store => {
                     const msg = JSON.parse(event.data);
                     const action = createAction(msg.event)
                     store.dispatch(action(msg.payload))
+                };
+
+                socket.onerror = () => {
+                    store.dispatch(wsError("WebSocket error"));
                 };
 
                 socket.onclose = () => {

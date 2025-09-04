@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 import Connection from './features/ws/components/Connection'
 import styles from './App.module.css'
 import { connect } from './features/ws/store/wsSlice'
-import Score from './features/score/Score'
-import GameStart from './features/game/GameStart'
+import Score from './features/score/components/Score'
+import GameStart from './features/game/components/GameStart'
 
 function App() {
 

@@ -1,0 +1,8 @@
+.grid {
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  gap: 8px;
+  grid-auto-rows: 200px;
+  height: 100%;
+}
