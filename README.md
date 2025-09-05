@@ -1,3 +1,4 @@
 # How to start?
 
-run `npm run dev` in the root of the project
+run `pnpm install` to install the dependencies
+run `pnpm run dev` in the root of the project
