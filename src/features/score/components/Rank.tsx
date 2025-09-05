@@ -8,9 +8,9 @@ interface RankProps {
     player: string
 }
 
-function ordinal(n: number): string {
+export function ordinal(n: number): string {
     const v = n % 100
-    if (v >= 11 && v <= 13) return `${n}th`
+    if (v >= 11 && v <= 13) return `th`
     switch (n % 10) {
         case 1: return `st`
         case 2: return `nd`
